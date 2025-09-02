@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyx.healthsys.mapper.UserMapper">
+    <select id="getRoleNameByUserId" parameterType="Integer" resultType="String">
+    SELECT
+      b.role_name
+    FROM j_user_role a, j_role b
+    WHERE
+        <!-- 进行内连接，即只返回两张表中都存在的 role_id 值对应的记录。 -->
+      a.role_id=b.role_id
+        <!-- 在连接的结果集中，筛选出 user_id 等于输入参数 userId 的记录。 -->
+      AND a.user_id=#{userId}
+    </select>
+</mapper>

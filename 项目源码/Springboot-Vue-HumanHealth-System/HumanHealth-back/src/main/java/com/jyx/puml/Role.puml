@@ -1,0 +1,35 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontSize 17
+
+
+class RoleService {
+    - roleMapper: RoleMapper
+    + page(Page<T>, QueryWrapper<T>): IPage<T>
+    + addRole(Role): boolean
+    + updateRole(Role): void
+    + getRoleById(Integer): Role
+    + deleteRoleById(Integer): boolean
+    + list(): List<Role>
+}
+
+class Role {
+    - roleId: Integer
+    - roleName: String
+    - roleDesc: String
+    - menuIdList: List<Integer>
+    + getRoleId(): Integer
+    + setRoleId(Integer): void
+    + getRoleName(): String
+    + setRoleName(String): void
+    + getRoleDesc(): String
+    + setRoleDesc(String): void
+    + getMenuIdList(): List<Integer>
+    + setMenuIdList(List<Integer>): void
+}
+
+RoleService -> Role
+@enduml

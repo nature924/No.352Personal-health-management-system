@@ -1,0 +1,40 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontsize 17
+skinparam monochrome true
+
+
+actor User
+participant "Web/App UI"
+participant "API Server"
+participant "Database"
+
+User -> "Web/App UI": 打开缴费页面
+activate User
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 发送获取缴费信息请求
+activate "API Server"
+"API Server" -> "Database": 查询用户缴费信息
+activate "Database"
+"Database" --> "API Server": 返回用户缴费信息
+deactivate "Database"
+"API Server" -> "Web/App UI": 显示缴费信息
+deactivate "API Server"
+"Web/App UI" -> User: 显示缴费信息
+User -> "Web/App UI": 选择缴费类型并输入金额
+"Web/App UI" -> "API Server": 发送缴费请求
+activate "API Server"
+"API Server" -> "API Server": 验证缴费信息
+"API Server" -> "Database": 更新用户缴费信息
+activate "Database"
+"Database" --> "API Server": 返回更新结果
+deactivate "Database"
+"API Server" -> "Web/App UI": 显示缴费结果
+deactivate "API Server"
+"Web/App UI" -> User: 显示缴费结果
+deactivate "Web/App UI"
+deactivate User
+@enduml

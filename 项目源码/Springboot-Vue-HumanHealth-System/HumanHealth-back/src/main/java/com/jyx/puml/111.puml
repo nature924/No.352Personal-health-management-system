@@ -1,0 +1,53 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam ArrowColor black
+class CaiwuxinxiEntity {
+    -id : Long
+    -caiwumingcheng : String
+    -caiwuleixing : String
+    -shuliang : Integer
+    -caiwujiazhi : Float
+    -xiangqing : String
+    -dengjishijian : Date
+    -zhanghao : String
+    -xingming : String
+    -addtime : Date
+    +CaiwuxinxiEntity()
+    +CaiwuxinxiEntity(T)
+    +getId() : Long
+    +setId(Long)
+    +setCaiwumingcheng(String)
+    +getCaiwumingcheng() : String
+    +setCaiwuleixing(String)
+    +getCaiwuleixing() : String
+    +setShuliang(Integer)
+    +getShuliang() : Integer
+    +setCaiwujiazhi(Float)
+    +getCaiwujiazhi() : Float
+    +setXiangqing(String)
+    +getXiangqing() : String
+    +setDengjishijian(Date)
+    +getDengjishijian() : Date
+    +setZhanghao(String)
+    +getZhanghao() : String
+    +setXingming(String)
+    +getXingming() : String
+    +setAddtime(Date)
+    +getAddtime() : Date
+}
+
+class CaiwuxinxiService {
+    -baseService : IService<CaiwuxinxiEntity>
+    +insertOrUpdate(CaiwuxinxiEntity)
+    +deleteById(Serializable)
+    +updateById(CaiwuxinxiEntity)
+    +selectById(Serializable)
+    +selectOne(Wrapper<CaiwuxinxiEntity>)
+    +selectList(Wrapper<CaiwuxinxiEntity>)
+}
+
+CaiwuxinxiEntity --> CaiwuxinxiService
+
+@enduml

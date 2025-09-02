@@ -1,0 +1,34 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam ArrowColor black
+skinparam defaultFontSize 17
+
+
+
+class MenuService {
+    +getAllMenu(): List<Menu>
+}
+
+Menu -> MenuService
+
+class Menu {
+    -serialVersionUID: long
+    -menuId: Integer
+    -component: String
+    -path: String
+    -redirect: String
+    -name: String
+    -title: String
+    -icon: String
+    -parentId: Integer
+    -isLeaf: String
+    -hidden: Boolean
+    -children: List<Menu>
+    -meta: Map<String, Object>
+    +getMeta(): Map<String, Object>
+}
+
+
+@enduml

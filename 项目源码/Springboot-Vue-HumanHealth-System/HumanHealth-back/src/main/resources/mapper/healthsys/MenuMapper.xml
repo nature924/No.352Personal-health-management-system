@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyx.healthsys.mapper.MenuMapper">
+
+    <!-- 定义一个 id 为 getMenuListByUserId 的查询语句，返回类型为 Menu 类型的 List -->
+    <select id="getMenuListByUserId" resultType="Menu">
+    SELECT
+        a.*
+    FROM j_menu a,
+         j_role_menu b,
+         j_user_role c
+    WHERE a.`menu_id` = b.`menu_id`
+      AND b.`role_id` = c.`role_id`
+      AND c.`user_id` = #{userId}
+      AND a.`parent_id` = #{pid}
+</select>
+
+</mapper>

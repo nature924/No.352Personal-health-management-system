@@ -1,0 +1,37 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontsize 17
+skinparam monochrome true
+actor Manager
+participant "Web UI"
+participant "API Server"
+participant "Database"
+
+Manager -> "Web UI": 登录
+activate Manager
+activate "Web UI"
+"Web UI" -> "API Server": 请求获取公告列表
+activate "API Server"
+"API Server" -> "Database": 查询公告列表
+activate "Database"
+"Database" --> "API Server": 返回公告列表
+deactivate "Database"
+"API Server" -> "Web UI": 返回公告列表
+deactivate "API Server"
+"Web UI" -> "Web UI": 显示公告列表
+"Web UI" -> "Web UI": 管理员选择发布公告
+"Web UI" -> "API Server": 请求发布公告
+activate "API Server"
+"API Server" -> "Database": 保存公告信息
+activate "Database"
+"Database" --> "API Server": 返回保存结果
+deactivate "Database"
+"API Server" -> "Web UI": 返回发布结果
+deactivate "API Server"
+"Web UI" -> "Web UI": 显示发布结果
+deactivate "Web UI"
+deactivate Manager
+@enduml

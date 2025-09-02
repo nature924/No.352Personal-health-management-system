@@ -1,0 +1,66 @@
+@startuml
+actor User
+participant "Web UI" as WebUI
+participant "API Server" as APIServer
+database "Database" as DB
+
+User -> WebUI: 登录
+activate WebUI
+
+WebUI -> APIServer: 发送登录请求
+activate APIServer
+
+APIServer -> DB: 验证用户信息
+activate DB
+
+DB --> APIServer: 返回验证结果
+deactivate DB
+
+APIServer --> WebUI: 返回登录结果
+deactivate APIServer
+
+User -> WebUI: 进入身体信息管理页面
+User -> WebUI: 选择要操作的身体信息记录
+
+WebUI -> APIServer: 发送查询请求
+activate APIServer
+
+APIServer -> DB: 查询身体信息列表
+activate DB
+
+DB --> APIServer: 返回查询结果
+deactivate DB
+
+APIServer --> WebUI: 返回身体信息列表
+deactivate APIServer
+
+User -> WebUI: 点击编辑按钮，修改身体信息
+
+WebUI -> APIServer: 发送修改请求
+activate APIServer
+
+APIServer -> DB: 修改身体信息记录
+activate DB
+
+DB --> APIServer: 返回修改结果
+deactivate DB
+
+APIServer --> WebUI: 返回修改结果
+deactivate APIServer
+
+User -> WebUI: 离开页面
+
+WebUI -> APIServer: 发送登出请求
+activate APIServer
+
+APIServer -> DB: 删除用户会话信息
+activate DB
+
+DB --> APIServer: 返回删除结果
+deactivate DB
+
+APIServer --> WebUI: 返回登出结果
+deactivate APIServer
+
+deactivate WebUI
+@enduml

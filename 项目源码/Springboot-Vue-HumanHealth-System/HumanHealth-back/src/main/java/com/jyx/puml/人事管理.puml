@@ -1,0 +1,50 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontsize 17
+skinparam monochrome true
+actor Manager
+
+participant "Web/App UI"
+participant "API Server"
+participant "Database"
+
+Manager -> "Web/App UI": 打开员工信息管理界面
+activate Manager
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 获取员工列表请求
+activate "API Server"
+activate "Database"
+"API Server" -> "Database": 查询员工列表
+"Database" -> "API Server": 返回员工列表
+deactivate "Database"
+"API Server" -> "Web/App UI": 返回员工列表响应
+deactivate "API Server"
+
+Manager -> "Web/App UI": 打开部门信息管理界面
+
+"Web/App UI" -> "API Server": 获取部门列表请求
+activate "API Server"
+"API Server" -> "Database": 查询部门列表
+activate "Database"
+"Database" -> "API Server": 返回部门列表
+deactivate "Database"
+"API Server" --> "Web/App UI": 返回部门列表响应
+deactivate "API Server"
+deactivate "Web/App UI"
+
+Manager -> "Web/App UI": 打开权限管理界面
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 获取权限列表请求
+activate "API Server"
+"API Server" -> "Database": 查询权限列表
+activate "Database"
+"Database" -> "API Server": 返回权限列表
+deactivate "Database"
+"API Server" -> "Web/App UI": 返回权限列表响应
+deactivate "API Server"
+deactivate "Web/App UI"
+
+@enduml

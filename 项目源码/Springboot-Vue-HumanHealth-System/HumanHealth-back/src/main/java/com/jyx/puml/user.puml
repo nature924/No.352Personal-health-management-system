@@ -1,0 +1,54 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam ArrowColor black
+skinparam defaultFontSize 17
+
+class UserService {
++ insert(User): int
++ update(User): int
++ deleteById(int): int
++ getUserById(int): User
++ getUserByUsername(String): User
++ getAllUser(): List<User>
+}
+
+class BodyService {
++ insert(Body): int
++ update(Body): int
++ deleteById(int): int
++ getBodyById(int): Body
++ getAllBody(): List<Body>
++ getUserBodyList(int): List<Body>
++ getUserBodyById(int): BodyNotes
++ updateUserBody(BodyNotes): int
++ deleteUserBodyById(int): int
+}
+
+class BodyNotesService {
++ insert(BodyNotes): int
++ update(BodyNotes): int
++ deleteById(int): int
++ getBodyNotesByUserId(int): List<BodyNotes>
++ getBodyNotesById(int): BodyNotes
+}
+
+class User {
+-serialVersionUID: long
+-id: Integer
+-username: String
+-password: String
+-email: String
+-phone: String
+-status: Integer
+-avatar: String
+-deleted: Integer
+-roleIdList: List<Integer>
+-newPassword: String
+}
+
+UserService -> User
+BodyService --> User
+BodyNotesService --> User
+@enduml

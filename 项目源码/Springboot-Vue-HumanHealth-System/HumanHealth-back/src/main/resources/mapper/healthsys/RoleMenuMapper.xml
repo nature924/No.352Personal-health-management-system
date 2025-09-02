@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyx.healthsys.mapper.RoleMenuMapper">
+    <select id="getMenuIdListByRoleId" parameterType="Integer" resultType="Integer">
+        SELECT a.`menu_id`
+        FROM j_role_menu a, j_menu b
+        WHERE a.`menu_id` = b.`menu_id`
+        <!--表示只查询叶子节点菜单的ID，因为非叶子节点的菜单不应该被授予权限。-->
+        AND b.`is_leaf` = 'Y'
+        <!-- 表示查询具有特定角色ID的菜单ID，以获取该角色的权限列表。 -->
+        AND a.`role_id` = #{roleId}
+    </select>
+
+</mapper>

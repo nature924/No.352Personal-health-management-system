@@ -1,0 +1,28 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontSize 17
+
+class SportInfoService {
+    -sportInfoMapper : SportInfoMapper
+    +getAllSportInfos() : List<SportInfo>
+    +page(page: Page<SportInfo>, wrapper: LambdaQueryWrapper<SportInfo>) : void
+    +addSport(sport: SportInfo) : boolean
+    +updateSport(sport: SportInfo) : boolean
+    +getSportById(id: Integer) : SportInfo
+    +deleteSportById(id: Integer) : void
+}
+
+class SportInfo {
+    -id : Integer
+    -sportType : String
+    -suitableTime : String
+    -suitableHeartRate : String
+    -suitableFrequency : String
+    -recommendedSpeed : String
+}
+
+SportInfoService --> SportInfo
+@enduml

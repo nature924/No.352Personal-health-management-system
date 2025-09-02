@@ -1,0 +1,53 @@
+@startuml
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontsize 17
+skinparam monochrome true
+actor Manager
+participant "Web/App UI"
+participant "API Server"
+participant "Database"
+
+Manager -> "Web/App UI": 打开故障报修页面
+activate Manager
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 发送获取报修请求
+activate "API Server"
+"API Server" -> "Database": 查询未处理的故障报修信息
+activate "Database"
+"Database" --> "API Server": 返回未处理的故障报修信息
+deactivate "Database"
+"API Server" --> "Web/App UI": 返回未处理的故障报修信息
+deactivate "API Server"
+"Web/App UI" -> Manager: 显示未处理的故障报修信息
+deactivate "Web/App UI"
+
+Manager -> "Web/App UI": 选择故障报修
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 发送获取故障报修请求
+activate "API Server"
+"API Server" -> "Database": 查询故障报修详细信息
+activate "Database"
+"Database" --> "API Server": 返回故障报修详细信息
+deactivate "Database"
+"API Server" --> "Web/App UI": 返回故障报修详细信息
+deactivate "API Server"
+"Web/App UI" -> Manager: 显示故障报修详细信息
+deactivate "Web/App UI"
+
+Manager -> "Web/App UI": 处理故障报修
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 发送处理故障报修请求
+activate "API Server"
+"API Server" -> "Database": 更新故障报修状态为已处理
+activate "Database"
+"Database" --> "API Server": 返回更新结果
+deactivate "Database"
+"API Server" --> "Web/App UI": 返回更新结果
+deactivate "API Server"
+"Web/App UI" -> Manager: 显示更新结果
+deactivate "Web/App UI"
+deactivate Manager
+@enduml

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyx.healthsys.mapper.DetailMapper">
+
+    <select id="getDetailInfo" resultMap="detailResultMap">
+    SELECT detail.disease, detail.method, detail.notes, sport_info.sport_type, sport_info.suitable_time, sport_info.suitable_heart_rate, sport_info.suitable_frequency, sport_info.recommended_speed
+    FROM detail
+    INNER JOIN sport_info ON detail.sport_type = sport_info.sport_type
+    WHERE detail.sport_type = #{sport_type}
+</select>
+
+
+
+    <resultMap id="detailResultMap" type="Detail">
+        <result property="sportType" column="sport_type" />
+        <result property="disease" column="disease" />
+        <result property="method" column="method" />
+        <result property="notes" column="notes" />
+    </resultMap>
+
+
+</mapper>

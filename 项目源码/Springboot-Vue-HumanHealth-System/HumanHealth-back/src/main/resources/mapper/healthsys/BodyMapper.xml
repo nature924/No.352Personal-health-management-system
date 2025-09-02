@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyx.healthsys.mapper.BodyMapper">
+
+
+    <select id="getBodyListByUserId" resultType="Body">
+SELECT j_body.* FROM j_body,j_user
+where j_body.id = j_user.id
+AND j_user.id=#{pid}
+</select>
+
+</mapper>

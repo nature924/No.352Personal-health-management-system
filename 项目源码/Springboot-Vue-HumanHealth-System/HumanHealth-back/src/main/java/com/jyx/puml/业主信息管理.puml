@@ -1,0 +1,38 @@
+@startuml
+
+skinparam classBackgroundColor transparent
+skinparam classBorderColor black
+skinparam Shadowing false
+skinparam  ArrowColor black
+skinparam defaultFontsize 17
+skinparam monochrome true
+actor Manager
+participant "Web/App UI"
+participant "API Server"
+participant "Database"
+
+Manager -> "Web/App UI": 打开业主信息管理页面
+activate Manager
+activate "Web/App UI"
+"Web/App UI" -> "API Server": 查询业主信息
+activate "API Server"
+"API Server" -> "Database": 查询
+activate "Database"
+"Database" --> "API Server": 返回
+deactivate "Database"
+"API Server" -> "Web/App UI": 显示
+deactivate "API Server"
+
+Manager -> "Web/App UI": 点击编辑/添加/删除业主信息
+"Web/App UI" -> "API Server": 发送请求
+activate "API Server"
+"API Server" -> "Database": 处理请求
+activate "Database"
+"Database" --> "API Server": 返回结果
+deactivate "Database"
+"API Server" -> "Web/App UI": 显示结果
+deactivate "API Server"
+
+deactivate "Web/App UI"
+deactivate Manager
+@enduml
